@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Todo from '../../models/Todo';
+import { TodosContext } from '../../store/todos-context';
 import TodoItem from '../todo-item/TodoItem';
 
 import classes from './Todos.module.css';
 
-const Todos: React.FC<{ items: Todo[], onItemClick: (id: string) => void }> = ({ items, onItemClick }) => {
+const Todos: React.FC = () => {
+    const todoCtx = useContext(TodosContext);
+
     return (
         <ul className={classes.todos}>
             {
-                items.map((item: Todo) =>
-                    <TodoItem onItemClick={onItemClick.bind(null, item.id)} key={item.id} todo={item} />)}
+                todoCtx.items.map((item: Todo) => <TodoItem key={item.id} todo={item} />)}
         </ul>
     );
 };
