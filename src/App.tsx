@@ -10,10 +10,15 @@ function App() {
         setTodos(prevState => prevState.concat(new Todo(text)));
     };
 
+    const itemClickHandler = (id: string) => {
+        const newTodos = todos.filter(todo => todo.id !== id);
+        setTodos(newTodos);
+    }
+
     return (
         <div className="App">
             <NewTodo onAddTodo={addTodoHandler} />
-            <Todos items={todos} />
+            <Todos onItemClick={itemClickHandler} items={todos} />
         </div>
     );
 }

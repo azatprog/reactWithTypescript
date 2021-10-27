@@ -4,10 +4,12 @@ import TodoItem from '../todo-item/TodoItem';
 
 import classes from './Todos.module.css';
 
-const Todos: React.FC<{ items: Todo[] }> = ({ items }) => {
+const Todos: React.FC<{ items: Todo[], onItemClick: (id: string) => void }> = ({ items, onItemClick }) => {
     return (
         <ul className={classes.todos}>
-            {items.map((item: Todo) => <TodoItem key={item.id} text={item.text} />)}
+            {
+                items.map((item: Todo) =>
+                    <TodoItem onItemClick={onItemClick.bind(null, item.id)} key={item.id} todo={item} />)}
         </ul>
     );
 };
